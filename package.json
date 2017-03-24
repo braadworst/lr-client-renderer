@@ -1,0 +1,25 @@
+{
+  "name": "lr-client-renderer",
+  "version": "1.0.0",
+  "description": "Client side renderer extension for lagoon-road",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braadworst/lr-client-renderer.git"
+  },
+  "keywords": [
+    "extension",
+    "lagoon-road",
+    "clientside",
+    "renderer"
+  ],
+  "author": "Roy Niels",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/braadworst/lr-client-renderer/issues"
+  },
+  "homepage": "https://github.com/braadworst/lr-client-renderer#readme"
+}
