@@ -1,70 +1,41 @@
-module.exports = function() {
+module.exports = update => {
 
   let placeholders = {};
-  let callbacks = {
-    ready : false
-  }
 
-  function addObserver(placeholder) {
+  function addObserver(id) {
     const observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
-        if (mutation.addedNodes) {
-          mutation.addedNodes.forEach(node => {
-            if (node.getAttribute && node.getAttribute('id')) {
-              if (!callbacks.ready) {
-                throw new Error('No callback added for the renderer ready callback');
-              }
-              if (typeof callbacks.ready !== 'function') {
-                throw new Error('Renderer ready callback needs to be of type function');
-              }
-              callbacks.ready(node.getAttribute('id'));
-            }
-          })
+        if (mutation.attributeName === 'lg-placeholder') {
+          update({ matchValue : window.location.pathname, updateType : 'domReady' });
         }
       });
     });
 
     // pass in the target node, as well as the observer options
-    observer.observe(document.querySelector(placeholder), { childList : true, subtree : false });
-
-    placeholders[placeholder] = observer;
-  }
-
-  function removeObserver(placeholder) {
-    if (placeholders[placeholder]) {
-      placeholders[placeholder].disconnect();
-      delete placeholders[placeholder];
-    }
+    observer.observe(document.querySelector(id), { attributes : true, childList : false, subtree : false });
+    placeholders[id].observer = observer;
   }
 
   const exposed = {
-    init () {
-      const components = [].slice.call(document.querySelectorAll('[id]'));
-      components.forEach(component => {
-        if (callbacks.ready) {
-          callbacks.ready(component.getAttribute('id'));
-        }
-      });
-    },
-    ready(callback) {
-      callbacks.ready = callback;
-    },
-    render(html, placeholder) {
-      if (!document.querySelector(placeholder)) {
-        throw new Error(`Trying to render, but could not find placeholder ${ placeholder }`);
+    render(html, id) {
+      if (placeholders[id] && placeholders[id].observer) {
+        placeholders[id].observer.disconnect();
       }
-      exposed.remove(placeholder);
-      if (!placeholders[placeholder]) {
-        addObserver(placeholder);
-      }
-      document.querySelector(placeholder).innerHTML = html;
+      placeholders[id] = { html };
     },
-    remove(placeholder) {
-      if (!document.querySelector(placeholder)) {
-        throw new Error(`Trying to remove, but could not find placeholder ${ placeholder }`);
-      }
-      removeObserver(placeholder);
-      document.querySelector(placeholder).innerHTML = '';
+    html() {
+      Object
+        .keys(placeholders)
+        .filter(id => placeholders[id].html)
+        .forEach(id => {
+          if (!document.querySelector(id)) {
+            throw new Error(`Trying to render, but could not find placeholder ${ id }`);
+          }
+          addObserver(id);
+          document.querySelector(id).innerHTML = placeholders[id].html;
+          document.querySelector(id).setAttribute('lg-placeholder', id);
+          delete placeholders[id].html;
+        });
     }
   }
 

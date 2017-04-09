@@ -4,7 +4,7 @@
   "description": "Client side renderer extension for lagoon-road",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "min": "node_modules/.bin/browserify index.js -t [ babelify --presets [ latest ] ] --ignore-missing | uglifyjs > index.min.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/braadworst/lr-client-renderer/issues"
   },
-  "homepage": "https://github.com/braadworst/lr-client-renderer#readme"
+  "homepage": "https://github.com/braadworst/lr-client-renderer#readme",
+  "devDependencies": {
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-latest": "^6.22.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.0.0",
+    "minifier": "^0.8.1",
+    "uglify-js-harmony": "^2.7.5"
+  }
 }
