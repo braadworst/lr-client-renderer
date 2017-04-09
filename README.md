@@ -1,6 +1,6 @@
 # lg-client-renderer reference
 
-A Lagoon road extension that gives you renderer functionality on the client.
+A Lagoon road extension that gives you renderer functionality on the client. This renderer does pretty simple replacement and doesn't do virtual dom kinda replacement, only on changes. It should suffice for about 95% of all cases. When you start working more with a websocket pub/sub system you might want to write your own renderer so user input will not get replaced on dom updates. Read more about writing extensions in the [guide](https://www.lagoonroad.com/guide).
 
 | Information | - |
 | ----------- | - |
