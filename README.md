@@ -7,7 +7,7 @@ A Lagoon road extension that gives you renderer functionality on the client. Thi
 | Code coverage | - |
 | Repo link | [lr-client-renderer](https://github.com/lagoon-road/lr-client-renderer) |
 | Dependencies | - |
-| Size (Browserify, Babel, Uglify and Gzip)| 789 bytes |
+| Size (Browserify, Babel and Gzip)| 851 bytes |
 | Version | 1.0.0 |
 | License | MIT |
 | Usage | [guide](https://lagoonroad.com/guide) |
