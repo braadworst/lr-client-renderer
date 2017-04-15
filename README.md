@@ -20,8 +20,8 @@ A Lagoon road extension that gives you renderer functionality on the client. Thi
 
 ```
 const router   = require('lr-client-renderer');
-const core     = require('lr-core');
-const road     = core('client')
+const road     = require('lr-main')('client');
+road
   .extension('renderer', renderer, true);
 ```
 
