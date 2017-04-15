@@ -2,6 +2,8 @@
 
 A Lagoon road extension that gives you renderer functionality on the client. This renderer does quick replacement and doesn't do virtual dom html difference changes. It should suffice for about 95% of all cases. When you start working more with a websocket pub/sub system you might want to consider writing your own renderer or use a virtual dom approach so user input will not get replaced on dom updates. Read more about writing extensions in the [guide](https://lagoonroad.com/guide).
 
+> The client side renderer sends out update events whenever a component has been added to the DOM. See the [guide](https://lagoonroad.com/guide/working-with-dom-events) to understand how to implement this.
+
 | Information | - |
 | ----------- | - |
 | Code coverage | - |
